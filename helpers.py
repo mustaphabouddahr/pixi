@@ -1,4 +1,5 @@
-def toWebp(filename):
+import os
+def toWebp(filename, root):
     parts = filename.split(".")
-    newFilename = parts[0] + ".webp"
+    newFilename = os.path.join(root, parts[0] + ".webp")
     return newFilename
