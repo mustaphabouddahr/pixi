@@ -1,6 +1,7 @@
 # Pixi
-<img width="1408" height="768" alt="Gemini_Generated_Image_nz4xiynz4xiynz4x" src="https://github.com/user-attachments/assets/51b18bd7-1877-491a-8f37-6079f8f3818c" />
-Resize and compress images for web performance without the headache.
+
+<img alt="pixi logo" src="./pixi.png" />
+Resize and compress and convert images to webp for web performance without the headache.
 
 ## Quick Start
 
@@ -11,3 +12,9 @@ pip install -r requirements.txt
 # Run
 python pixi.py
 ```
+
+## CLI argements
+
+### -p
+
+the path where u want the images to be converted the default is "./"
