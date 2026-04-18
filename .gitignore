@@ -2,3 +2,5 @@ __pycache__/
 .vscode/
 /images
 test.py
+.pytest_cache/
+tests/__pycache__

@@ -1,3 +1,4 @@
 Pillow
 argparse
 os
+pytest

@@ -17,6 +17,7 @@ print("--------------------------------------")
 
 count = 0
 
+# script
 for root, dirs, files in os.walk(args.path):
     for filename in files:
         filepath = os.path.join(root, filename)
@@ -24,15 +25,19 @@ for root, dirs, files in os.walk(args.path):
             if filename.endswith((".jpg",".jpeg",".png")):
                 img = Image.open(filepath)
                 width, height = img.size
-                
+                new_filename = toWebp(filename, root)
 
                 if width > 1080:
                     img.thumbnail((1080, 1080), Image.LANCZOS)
                     new_width, new_height = img.size
-                    new_filename = toWebp(filename, root)
                     img.save(new_filename, "WEBP", quality=args.quality)
                     os.remove(filepath)
                     print(f"{filename} ({width}x{height}) -> {new_filename} ({new_width}x{new_height})")
+                    count  += 1
+                else:
+                    img.save(new_filename, "WEBP", quality=args.quality)
+                    os.remove(filepath)
+                    print(f"{filename} ({width}x{height}) -> converted to Webp")
                     count  += 1
                     
                 img.close()
@@ -45,15 +50,15 @@ for root, dirs, files in os.walk(args.path):
                 if width > 1080:
                     img.thumbnail((1080,1080), Image.LANCZOS)
                     new_height, new_width = img.size
-                    img.save(filepath,"WEBP", quality=args.quality)
+                    img.save(filepath, quality=args.quality)
                     print(f"{filename} {width}x{height}) -> ({new_width}x{new_height})")
                     count  += 1
 
                 img.close()
                     
-        except:
-            print(f"Failed: {filepath} - Skipped")
+        except Exception as e:
+            print(f"Failed: {filepath} - {e}")
         
 
 print("--------------------------------------")
-print(f"Total file resized & converted: {count}")
+print(f"Total file resized & compressed & converted to Webp: {count}")
