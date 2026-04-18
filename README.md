@@ -1,4 +1,4 @@
-# Pixi
+# Pixi - Image Resize - Compression - toWebp
 
 <img alt="pixi logo" src="./pixi.webp" />
 Resize and compress and convert images to webp for web performance without the headache.
@@ -8,7 +8,9 @@ Resize and compress and convert images to webp for web performance without the h
 ```bash
 # Install dependencies
 pip install -r requirements.txt
+```
 
+```bash
 # Run
 python pixi.py
 ```
@@ -19,11 +21,20 @@ python pixi.py
 
 the path where u want the images to be converted the default is "./"
 
+```bash
+    python pixi.py -p "./"
+```
+
 ### quality | -q
 
-the quality
+the compression quality by default it's 80% can be change throw:
+
+```bash
+    python pixi.py -q 70
+```
 
 # Features
 
 - access all the images in the folders and the subfolders
 - compress the images to 80% by default can be change throw <a href="#cli-argements">cli argements</a>
+- file extention change (.jpeg, .jpg, .png) to webp
