@@ -20,34 +20,39 @@ count = 0
 for root, dirs, files in os.walk(args.path):
     for filename in files:
         filepath = os.path.join(root, filename)
-        if filename.endswith((".jpg",".jpeg",".png")):
-            img = Image.open(filepath)
-            width, height = img.size
-            
-
-            if width > 1080:
-                img.thumbnail((1080, 1080), Image.LANCZOS)
-                new_width, new_height = img.size
-                new_filename = toWebp(filename, root)
-                img.save(new_filename, "WEBP", quality=args.quality)
-                os.remove(filepath)
-                print(f"{filename} ({width}x{height}) -> {new_filename} ({new_width}x{new_height})")
+        try:
+            if filename.endswith((".jpg",".jpeg",".png")):
+                img = Image.open(filepath)
+                width, height = img.size
                 
-            img.close()
-            count  += 1
 
-        if (filename.endswith(".webp")):
-            img  = Image.open(filepath)
-            width,height = img.size
+                if width > 1080:
+                    img.thumbnail((1080, 1080), Image.LANCZOS)
+                    new_width, new_height = img.size
+                    new_filename = toWebp(filename, root)
+                    img.save(new_filename, "WEBP", quality=args.quality)
+                    os.remove(filepath)
+                    print(f"{filename} ({width}x{height}) -> {new_filename} ({new_width}x{new_height})")
+                    count  += 1
+                    
+                img.close()
+                
 
-            if width > 1080:
-                img.thumbnail((1080,1080), Image.LANCZOS)
-                new_height, new_width = img.size
-                img.save(filename,"WEBP", quality=args.quality)
-                print(f"{filename} {width}x{height}) -> ({new_width}x{new_height})")
+            if (filename.endswith(".webp")):
+                img  = Image.open(filepath)
+                width,height = img.size
 
-            img.close()
-            count  += 1
+                if width > 1080:
+                    img.thumbnail((1080,1080), Image.LANCZOS)
+                    new_height, new_width = img.size
+                    img.save(filepath,"WEBP", quality=args.quality)
+                    print(f"{filename} {width}x{height}) -> ({new_width}x{new_height})")
+                    count  += 1
+
+                img.close()
+                    
+        except:
+            print(f"Failed: {filepath} - Skipped")
         
 
 print("--------------------------------------")
